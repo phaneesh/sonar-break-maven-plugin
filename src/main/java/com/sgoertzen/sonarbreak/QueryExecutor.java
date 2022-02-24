@@ -24,9 +24,9 @@ import java.text.SimpleDateFormat;
  */
 public class QueryExecutor {
 
-    public static final String SONAR_FORMAT_PATH = "api/measures/component?componentKey=%s"
+    public static final String SONAR_FORMAT_PATH = "api/measures/component?component=%s"
             + "&metricKeys=quality_gate_details";
-    public static final String SONAR_ANALYSIS_TIME_PATH = "api/ce/component?componentKey=%s";
+    public static final String SONAR_ANALYSIS_TIME_PATH = "api/ce/component?component=%s";
     public static final int SONAR_CONNECTION_RETRIES = 10;
     public static final int SONAR_PROCESSING_WAIT_TIME = 10000;  // wait time between sonar checks in milliseconds
 

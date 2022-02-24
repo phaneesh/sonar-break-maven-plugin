@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.sgoertzen</groupId>
+    <groupId>com.github.phaneesh</groupId>
     <artifactId>sonar-break-maven-plugin</artifactId>
-    <version>1.2.6-SNAPSHOT</version>
+    <version>1.2.7</version>
     <packaging>maven-plugin</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A maven plugin that will fail a maven build if sonar finds errors with your project.</description>
-    <url>https://github.com/sgoertzen/sonar-break-maven-plugin</url>
+    <url>https://github.com/phaneesh/sonar-break-maven-plugin</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,9 +26,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git@github.com:sgoertzen/sonar-break-maven-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:sgoertzen/sonar-break-maven-plugin.git</developerConnection>
-        <url>https://github.com/sgoertzen/sonar-break-maven-plugin</url>
+        <connection>scm:git:git@github.com:phaneesh/sonar-break-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:phaneesh/sonar-break-maven-plugin.git</developerConnection>
+        <url>https://github.com/phaneesh/sonar-break-maven-plugin</url>
     </scm>
     <licenses>
         <license>
@@ -43,18 +43,23 @@
             <organization>None</organization>
             <organizationUrl>https://github.com/sgoertzen</organizationUrl>
         </developer>
+        <developer>
+            <name>Phaneesh Nagaraja</name>
+            <email>phaneesh.n@gmail.com</email>
+            <organization>None</organization>
+            <organizationUrl>https://github.com/phaneesh</organizationUrl>
+        </developer>
+
     </developers>
     <prerequisites>
         <maven>3.0.2</maven>
     </prerequisites>
+
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>clojars</id>
+            <name>Clojars repository</name>
+            <url>https://clojars.org/repo</url>
         </repository>
     </distributionManagement>
 
@@ -62,7 +67,7 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.5.2</version>
+            <version>3.8.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -72,32 +77,32 @@
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.5</version>
+            <version>3.6.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.8.5</version>
+            <version>2.13.1</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>2.11.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.2</version>
         </dependency>
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.9.6</version>
+            <version>2.10.13</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
-            <version>3.0</version>
+            <version>3.8.1</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -109,8 +114,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -131,23 +136,6 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven-gpg-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <skip>${maven.signing.skip}</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <version>${maven-source-plugin.version}</version>
                 <executions>
@@ -159,48 +147,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>${nexus-staging-maven-plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>Run Tests</id>
-                        <phase>none</phase> <!-- This needs to run after install so phase is none and invoked manually -->
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>${basedir}/integration-tests/run.sh</executable>
-                    <workingDirectory>${basedir}/integration-tests</workingDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
+         </plugins>
     </build>
 </project>

@@ -17,7 +17,7 @@ public class QueryExecutorTest {
         URL sonarURL = new URL("https://sonar.test.com");
         Query query = new Query("some-service", "1.0");
         URL url = QueryExecutor.buildUrl(sonarURL, query,QueryExecutor.SONAR_FORMAT_PATH);
-        assertEquals("URL", "https://sonar.test.com/api/measures/component?componentKey=some-service&metricKeys=quality_gate_details", url.toString());
+        assertEquals("URL", "https://sonar.test.com/api/measures/component?component=some-service&metricKeys=quality_gate_details", url.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)

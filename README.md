@@ -1,28 +1,25 @@
 # sonar-break-maven-plugin
 
-[![Codacy Badge](https://api.codacy.com/project/badge/grade/fa1e3196dc0549f1b45cf75c87c0227e)](https://www.codacy.com/app/sgoertzen/sonar-break-maven-plugin)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.sgoertzen/sonar-break-maven-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.sgoertzen/sonar-break-maven-plugin/)
-[![Build Status](https://travis-ci.org/sgoertzen/sonar-break-maven-plugin.svg?branch=master)](https://travis-ci.org/sgoertzen/sonar-break-maven-plugin)
 
-A maven plugin that will fail a maven build if sonar reports errors with your project.  Tested with SonarQube 5.2 through 6.2.
+A maven plugin that will fail a maven build if sonar reports errors with your project.  Tested with SonarQube 5.2 through 8.7.
 
 ## Maven 
 To include in your project, update your pom.xml with the following:
 
     <dependencies>
         <dependency>
-            <groupId>com.github.sgoertzen</groupId>
+            <groupId>com.github.phaneesh</groupId>
             <artifactId>sonarbreak</artifactId>
-            <version>1.2.2</version>
+            <version>1.2.7</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>com.github.sgoertzen</groupId>
+                <groupId>com.github.phaneesh</groupId>
                 <artifactId>sonarbreak</artifactId>
-                <version>1.2.2</version>
+                <version>1.2.7</version>
                 <configuration>
                     <sonarServer>https://sonar.yourserver.com</sonarServer>
                 </configuration>
@@ -40,9 +37,9 @@ These parameter goes into the configuration section so the build piece of your p
     <build>
         <plugins>
             <plugin>
-                <groupId>com.github.sgoertzen</groupId>
+                <groupId>com.github.phaneesh</groupId>
                 <artifactId>sonarbreak</artifactId>
-                <version>1.2.2</version>
+                <version>1.2.7</version>
                 <configuration>
                     <sonarServer>https://sonar.yourserver.com</sonarServer>
                     <sonarLookBackSeconds>60</sonarLookBackSeconds>
@@ -57,7 +54,7 @@ You must also have the sonar plugin installed:
     <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>sonar-maven-plugin</artifactId>
-        <version>2.7.1</version>
+        <version>3.9.1.2184</version>
     </plugin>
 
 Then run maven using the command: 
@@ -69,11 +66,10 @@ Details:
 * sonar-break:sonar-break - This will execute this plugin, which will communicate with your sonar server and will break the build if an error is found.
 
 ### Full Example
-An full working pom.xml example can be seen in the integration-tests folder here: https://github.com/sgoertzen/sonar-break-maven-plugin/blob/master/integration-tests/basic/pom.xml
+An full working pom.xml example can be seen in the integration-tests folder here: https://github.com/phaneesh/sonar-break-maven-plugin/blob/master/integration-tests/basic/pom.xml
 
 ## Hosting
-The plugin is hosted on [SonaType Nexus](https://oss.sonatype.org/content/groups/public/com/github/sgoertzen/sonar-break-maven-plugin) with the full history shown 
-[here](https://oss.sonatype.org/#nexus-search;quick~sonar-break-maven-plugin)
+The plugin is hosted on [Clojars](https://clojars.org/com.github.phaneesh/sonar-break-maven-plugin)
 
 ## Development
 ### Build
@@ -97,7 +93,7 @@ If you run "mvn verify" or "mvn install" it will attempt to sign the output usin
 
 
 ## Version History
-
+* 1.2.7 - Support for Sonarqube 8.x and 9.x and version updates
 * 1.2.2 - Suport for SonarQube 6.2 and version updates
 * 1.2 - Support for SonarQube 6.0
 * 1.1.6 - Switched to Java 8, support for SonarQube 5.6
